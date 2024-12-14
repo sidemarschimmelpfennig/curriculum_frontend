@@ -5,4 +5,8 @@ import router from "./router";
 import store from "./store";
 import "./assets/tailwind.css";
 
+import authMiddleware from './middleware/authMiddleware';
+
+authMiddleware({ store, router });
+
 createApp(App).use(store).use(router).mount("#app");

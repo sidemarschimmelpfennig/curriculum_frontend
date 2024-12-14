@@ -109,14 +109,12 @@ export default {
       retrypassword: "",
       passwordError: false,
       isAdmin: 0,
-      api: process.env.VUE_APP_API_URL,
+      api: process.env.API_URL,
     };
   },
   methods: {
     async createUser(event) {
-      event.preventDefault(); // Prevenir o comportamento padrão do botão
-
-      // Verificar se as senhas coincidem
+      event.preventDefault();
       if (this.password !== this.retrypassword) {
         this.passwordError = true;
         return;

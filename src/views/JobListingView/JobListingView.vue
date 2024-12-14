@@ -63,7 +63,8 @@ export default {
   methods: {
     async getJobsListing() {
       try {
-        let response = await axios.get(`${this.api}jobvacancies`);
+        let response = await axios.get(`http://127.0.0.1:8000/api/v1/jobs`);
+        console.log(response.data);
         this.arrayFromJobs = response.data;
       } catch (error) {
         console.log(error);

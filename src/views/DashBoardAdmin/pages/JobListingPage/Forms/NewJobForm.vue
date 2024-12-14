@@ -2,7 +2,7 @@
   <div class="mx-auto p-6 bg-white shadow-md rounded-lg applyforajob">
     <div class="text-xl font-semibold text-center flex">
       <h2 class="text-2xl font-semibold mb-4 pr-48 pl-5">
-        Cadastre seu Currículo
+        Cadastre uma nova vaga
       </h2>
       <span
         class="material-icons text-white bold pl-8 hover:text-red-600 hover:cursor-pointer"
@@ -10,12 +10,12 @@
         >close</span
       >
     </div>
-    <form @submit.prevent="submitForm" enctype="multipart/form-data">
+    <form class="form-new-job">
       <div class="flex flex-col space-y-2">
         <label
           for="full_Name"
           class="text-sm font-medium text-gray-700 text-start"
-          >Nome Completo</label
+          >Nome da vaga</label
         >
         <input
           type="text"
@@ -25,69 +25,58 @@
           class="flex-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
         />
       </div>
+      <div class="flex flex-col space-y-2 h-40">
+        <label
+          for="additional_info"
+          class="text-sm font-medium text-gray-700 text-start"
+          >Descrição</label
+        >
+        <textarea
+          id="additional_info"
+          v-model="formData.description"
+          class="flex-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          placeholder="Descreva a vaga aqui"
+        ></textarea>
+      </div>
 
       <div class="flex flex-col space-y-2">
         <label for="email" class="text-sm font-medium text-gray-700"
-          >Email</label
+          >Categorias :</label
         >
-        <input
-          type="email"
-          id="email"
-          v-model="formData.email"
+        <select
+          name=""
+          id=""
+          v-model="formData.category"
           required
           class="flex-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-        />
+        >
+          <option value="">Teste</option>
+        </select>
       </div>
       <div class="flex flex-col space-y-2">
-        <label for="phone" class="text-sm font-medium text-gray-700"
-          >Telefone</label
+        <label for="email" class="text-sm font-medium text-gray-700"
+          >Modelo de trabalho :</label
         >
-        <input
-          type="tel"
-          id="phone"
-          v-model="formData.phone"
+        <select
+          name=""
+          id=""
+          v-model="formData.mobilities"
           required
           class="flex-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-        />
+        >
+          <option value="">Teste</option>
+        </select>
       </div>
 
       <div class="flex flex-col space-y-2">
         <label for="skills" class="text-sm font-medium text-gray-700 text-start"
-          >Habilidades</label
+          >Requisitos :</label
         >
         <input
           type="text"
           id="skills"
           v-model="formData.skills"
           class="flex-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-        />
-      </div>
-      <div class="flex flex-col space-y-2 h-40">
-        <label
-          for="additional_info"
-          class="text-sm font-medium text-gray-700 text-start"
-          >Informações Adicionais</label
-        >
-        <textarea
-          id="additional_info"
-          v-model="formData.additional_info"
-          class="flex-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-          placeholder="Digite informações adicionais aqui..."
-        ></textarea>
-      </div>
-
-      <div class="flex flex-col space-y-2">
-        <label
-          for="curriculum"
-          class="text-sm font-medium text-gray-700 text-start"
-          >Currículo</label
-        >
-        <input
-          type="file"
-          id="curriculum"
-          @change="handleFileChange($event, 'curriculum')"
-          class="flex-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 py-2 px-3 text-sm"
-          placeholder="Escolha um arquivo"
         />
       </div>
 
@@ -110,9 +99,9 @@ export default {
     return {
       formData: {
         full_Name: "",
-        email: "",
-        phone: "",
-        additional_info: "",
+        description: "",
+        category: "",
+        mobilities: "",
         skills: "",
       },
       curriculum: "",
@@ -132,34 +121,17 @@ export default {
       try {
         // Criando uma instância de FormData
         const form = new FormData();
+        data = {
+          full_Name: "",
+          description: "",
+          category: "",
+          mobilities: "",
+          skills: "",
+        };
 
-        // Adicionando os campos do formulário
-        /* data = {
-          // Adicionando os dados do formulário ao FormData
-          full_name: this.formData.full_Name,
-          email: this.formData.email,
-          phone: this.formData.phone,
-          additional_info: this.formData.additional_info,
-          skills: this.formData.skills,
-        };*/
-
-        // form.append("curriculum", this.curriculum, file);
-
-        // if (this.formData.curriculum) {
-        //    form.append("curriculum", this.formData.curriculum);
-        //  }
-        //const curriculum = await axios.post(`${this.api}send`, data);
-
-        //  console.log(curriculum.data);
-
-        // Enviando a solicitação POST com FormData
-        const response = await axios.post(`${this.api}send`, form, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        });
+        const response = await axios.post(`${this.api}send`, form);
         console.log(response);
-        console.log("curriculo cadastrado com sucesso");
+        console.log("Nova vaga cadastrada com sucesso!");
         this.closeModal(); // Fechar o modal após o envio
       } catch (error) {
         console.error("Erro ao enviar o formulário:", error);
@@ -212,6 +184,9 @@ export default {
   .names {
     justify-content: start;
     justify-items: start;
+  }
+  .form-new-job {
+    width: 40rem;
   }
 }
 </style>
