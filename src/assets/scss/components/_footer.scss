@@ -1,0 +1,18 @@
+@import '@/assets/scss/main';
+
+
+.footer{
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: $background-color; /* Cor de fundo */
+    text-align: center; /* Centraliza o texto */
+    padding: 10px 0;
+    z-index: 1;
+    p{  
+        color: $white-color;
+        font-weight: 200;
+        font-size: 0.9rem;
+    }
+    
+  }

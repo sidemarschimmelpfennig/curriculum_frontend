@@ -1,0 +1,66 @@
+@import '@/assets/scss/main';
+
+  .component{
+    margin: 0;
+    padding: 0;
+  }
+
+  
+  .readmore{
+    background-color: $secondary-color;
+    border-radius: 0.4rem;
+    padding: 10px;
+    transition: 0.5s;
+
+    @media (max-width:500px) {
+      font-size: 1rem;
+      padding: 0.4rem; 
+    }
+  };
+  .remote{
+    @media (max-width:500px) {
+      font-size: 1rem;
+      padding: 0.4rem; 
+    }
+  }
+
+.job {
+  padding: 5rem; 
+  @media (max-width: 900px){
+        padding: 2.5rem;
+    }
+  @media (max-width: 500px) {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0.8rem;
+
+    .job-component{
+      margin-left: 0;
+      margin-right: 0;
+      justify-content: center;
+      width: 100vw;
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+
+      .job-header{
+        font-size: 0.8rem;
+      }
+      .job-content{
+        font-size: 1rem;
+        text-align: start;
+        a{
+          font-size: 1.2rem;
+          line-height: 1rem;
+        }
+          
+        }
+      }
+    } 
+  .readmore:hover{
+    background-color: rgba($tertiary-color, 0.9) ;
+    color: $white-color;
+  }
+}
+
+  

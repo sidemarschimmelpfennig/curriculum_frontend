@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Merienda:wght@300..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Farsan&display=swap');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons+Outlined');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons+Rounded');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons+Sharp');
+
+@import '@/assets/scss/colors';
+
+#app {
+    font-family: "Roboto", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+    padding: 0;
+    margin: 0;
+  }
+
+.farsan-regular {
+  font-family: "Farsan", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.material-icons {
+  font-family: 'Material Icons', sans-serif;
+  font-size: 2.2rem; /* Tamanho do ícone */
+  color: #000; /* Cor do ícone */
+}
