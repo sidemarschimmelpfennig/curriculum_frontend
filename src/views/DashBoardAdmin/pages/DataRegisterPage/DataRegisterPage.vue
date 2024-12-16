@@ -11,12 +11,10 @@
             :key="index"
             class="w-[360px] h-[200px] text-gray-700 bg-slate-300 flex flex-col items-center justify-between rounded-lg shadow-md mx-4 my-4 hover:bg-gray-400 hover:cursor-pointer"
           >
-            <!-- Título do container -->
             <h2 class="text-xl font-semibold mt-4 hover:text-white">
               {{ item.title }}
             </h2>
 
-            <!-- Botões -->
             <div class="flex space-x-2 mb-4">
               <button
                 class="material-icons text-gray-700 hover:text-white"

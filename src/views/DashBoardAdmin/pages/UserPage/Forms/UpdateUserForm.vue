@@ -4,7 +4,7 @@
       <h3 class="pr-11">Adicionar Novo Usuário</h3>
       <span
         class="material-icons bold pl-8 hover:text-red-600 hover:cursor-pointer text-gray-700"
-        @click="closeModal"
+        @click="closeModal()"
         >close</span
       >
     </div>
@@ -16,7 +16,7 @@
       <input
         type="text"
         id="named"
-        v-model="nomes"
+        v-model="form.named"
         class="mt-1 block w-fullborder border-gray-500 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 py-2 px-3 text-sm"
         placeholder="Digite seu nome"
       />
@@ -28,7 +28,7 @@
       <input
         type="email"
         id="email"
-        v-model="email"
+        v-model="form.email"
         class="mt-1 block w-fullborder border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 py-2 px-3 text-sm"
         placeholder="Digite o email"
       />
@@ -41,7 +41,7 @@
       <input
         type="password"
         id="password"
-        v-model="password"
+        v-model="form.password"
         class="mt-1 block w-fullborder border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 py-2 px-3 text-sm"
         placeholder="Digite a senha"
       />
@@ -54,33 +54,44 @@
     </button>
   </div>
 </template>
-  
-  <script>
+    
+    <script>
 export default {
   props: {
     show: {
       type: Boolean,
       required: true,
     },
+    idFromUser: {
+      type: String,
+      required: true,
+    },
   },
   data() {
     return {
-      nomes: "",
-      password: "",
-      email: "",
-      is_admin: 1,
+      form: {
+        named: "",
+        password: "",
+        email: "",
+        is_admin: 0,
+      },
+      api: process.env.VUE_APP_API_URL,
     };
   },
   methods: {
     submitForm() {
       console.log({
-        Nome: this.named,
-        Email: this.email,
-        Senha: this.password,
-        Nível: this.is_admin,
+        named: this.named,
+        email: this.email,
+        password: this.password,
+        is_admin: this.is_admin,
       });
-      // Aqui você pode implementar o envio da API.
       this.$emit("close");
+    },
+
+    async getUserById() {
+      let response = await axios.get(`${this.api}users/${this.idFromUser}`);
+      this.form = response.data;
     },
     closeModal() {
       this.$emit("close");
@@ -93,18 +104,17 @@ export default {
   },
   mounted() {
     window.addEventListener("keydown", this.handleKeydown);
+    getUserById();
   },
   beforeUnmount() {
     window.removeEventListener("keydown", this.handleKeydown);
   },
 };
 </script>
-<style lang="scss">
+  <style lang="scss">
 .newuser {
   width: 15rem;
   padding: 10px;
-  //border: 1px solid #222;
-  // background-color: white;
   label {
     text-align: start;
   }
@@ -118,4 +128,4 @@ export default {
   }
 }
 </style>
-  
+    

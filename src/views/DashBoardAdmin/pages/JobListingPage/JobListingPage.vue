@@ -1,17 +1,24 @@
 <template>
-  <div class="joblist-table p-5" :class="{ 'active-form': showModal }">
+  <div
+    class="joblist-table p-5"
+    :class="{
+      activeModalClass:
+        showModalCreate || showModalUpdate || showModalView || showModalDelete,
+    }"
+  >
     <div class="flex flex-wrap justify-between items-center gap-4 mb-6">
       <button
         class="material-icons text-gray-600 hover:text-white px-4 py-2 rounded-md hover:bg-gray-600 shadow-md"
-        @click="showModal = true"
+        @click="showModalCreate = true"
       >
-        add <span> </span>
+        add
       </button>
-      <NewJobForm
-        v-if="showModal"
-        :show="showModal"
-        @close="showModal = false"
-        class="addnewuser"
+      <CreateJobForm
+        v-if="showModalCreate"
+        :show="showModalCreate"
+        @close="closeModal()"
+        class="openModal"
+        :mobilities="mobilities"
       />
 
       <div class="flex flex-wrap justify-center gap-4">
@@ -58,43 +65,63 @@
           :key="id"
           class="joblist-table-row flex items-center p-4 text-gray-600 hover:bg-gray-100 transition"
         >
-          <div class="w-1/5 truncate">{{ job.jobname }}</div>
+          <UpdateOrViewJobForm
+            v-if="showModalUpdate"
+            :show="showModalUpdate"
+            @close="closeModal()"
+            :idJobListing="isIdForJob"
+            :isUpdate="isUpdate"
+            class="openModal"
+          />
+          <DeleteMessage
+            v-if="showModalDelete"
+            :show="showModalDelete"
+            @close="closeModal()"
+            :labelText="textDelete"
+            :routeText="textRouteDelete"
+            class="openModal"
+          />
+          <UpdateOrViewJobForm
+            v-if="showModalView"
+            :show="showModalView"
+            @close="showModalView = false"
+            :idJobListing="isIdForJob"
+            :isUpdate="isUpdate"
+            class="openModal"
+          />
+          <div class="w-1/5 truncate">{{ job.name }}</div>
           <div class="w-2/5 truncate">
             {{ stringLimit(job.description, 40) }}
           </div>
-          <div class="w-1/5 truncate">{{ job.departmentCategory }}</div>
-          <div class="w-1/5">
-            <select
-              v-model="job.status"
-              class="w-full border-gray-300 rounded-md focus:ring-2 py-2 focus:ring-blue-500 outline-none"
-            >
-              <option
-                v-for="state in status"
-                :key="state.id"
-                :value="state.status"
-              >
-                {{ state.status }}
-              </option>
-            </select>
+          <div class="w-1/5 truncate">{{ job.department }}</div>
+          <div class="w-1/5 truncate">
+            {{ job.status }}
           </div>
           <div class="w-1/5 flex justify-center space-x-2">
             <button
-              class="material-icons text-red-600 hover:text-red-800"
-              @click="deleteJob(job.id)"
+              class="material-icons text-red-600 hover:text-red-800 border-none outline-none"
+              @click="deleteJob(job.id, job.name)"
             >
               delete
             </button>
             <button
-              class="material-icons text-blue-600 hover:text-blue-800"
+              class="material-icons text-blue-600 hover:text-blue-800 border-none outline-none"
               @click="editJob(job.id)"
             >
               edit
             </button>
+
             <button
-              class="material-icons text-gray-600 hover:text-gray-800"
-              @click="viewJob(job.id)"
+              class="material-icons text-gray-600 hover:text-gray-800 border-none outline-none"
+              @click="openJobView(job.id)"
             >
               visibility
+            </button>
+            <button
+              class="material-icons text-gray-600 hover:text-gray-800 border-none outline-none"
+              @click="getCandidates(job.id)"
+            >
+              lists
             </button>
           </div>
         </div>
@@ -104,24 +131,35 @@
 </template>
 <script>
 import axios from "axios";
-import NewJobForm from "./Forms/NewJobForm.vue";
+import CreateJobForm from "./Forms/CreateJobForm.vue";
+import UpdateOrViewJobForm from "./Forms/UpdateOrViewJobForm.vue";
+import DeleteMessage from "@/components/DeleteMessage.vue";
 
 export default {
   name: "JobListComponent",
   data() {
     return {
       joblist: [],
-      status: [], // Status também é usado como categorias
+      status: [],
       searchText: "",
       selectedCategory: "",
       api: process.env.VUE_APP_API_URL,
-      showModal: false,
+      showModalCreate: false,
+      showModalUpdate: false,
+      showModalView: false,
+      showModalDelete: false,
+      isUpdate: false,
+      form: {},
+      textDelete: "Deseja excluir esta vaga?",
+      textRouteDelete: "",
+      mobilities: ["Hibrido", "Presencial", "Remoto"],
+      isIdForJob: "",
     };
   },
   computed: {
     filteredJobs() {
       return this.joblist.filter((job) => {
-        const matchesText = job.jobname
+        const matchesText = job.name
           .toLowerCase()
           .includes(this.searchText.toLowerCase());
         const matchesCategory =
@@ -129,6 +167,9 @@ export default {
           job.status.toLowerCase() === this.selectedCategory.toLowerCase();
         return matchesText && matchesCategory;
       });
+    },
+    getJob() {
+      return (id) => this.joblist.find((job) => job.id === id);
     },
   },
   methods: {
@@ -140,38 +181,45 @@ export default {
         console.error("Erro ao buscar vagas:", error);
       }
     },
-    async getStatus() {
-      try {
-        const response = await axios.get(`${this.api}status`);
-        this.status = response.data;
-      } catch (error) {
-        console.error("Erro ao buscar status:", error);
-      }
-    },
     stringLimit(text, limit) {
       return text.length > limit ? `${text.substring(0, limit)}...` : text;
     },
-    async deleteJob(id) {
+    async deleteJob(id, name) {
       try {
-        await axios.delete(`${this.api}job/${id}`);
-        this.joblist = this.joblist.filter((job) => job.id !== id);
+        this.showModalDelete = true;
+        this.textDelete = `Deseja excluir a vaga de "${name}"?`;
+        this.textRouteDelete = `${this.api}joblisting/${id}`;
       } catch (error) {
         console.error("Erro ao deletar vaga:", error);
       }
     },
     editJob(id) {
-      console.log(`Edit job with ID: ${id}`);
+      this.showModalUpdate = true;
+      this.isUpdate = true;
+      this.form = this.getJob(id);
     },
-    viewJob(id) {
-      console.log(`View job with ID: ${id}`);
+    openJobView(id) {
+      this.isIdForJob = String(id);
+      this.isUpdate = false;
+      this.showModalView = true;
     },
-    addNewJob() {
-      this.$router.push("/admin/joblistpage/create");
+    closeModal() {
+      this.showModalUpdate = false;
+      this.showModalCreate = false;
+      this.showModalDelete = false;
+      this.getJobs();
+    },
+    getCandidates(id) {
+      this.$router.push({ name: "candidatestojob", params: { id } });
     },
   },
-  mounted() {},
+  mounted() {
+    this.getJobs();
+  },
   components: {
-    NewJobForm,
+    CreateJobForm,
+    UpdateOrViewJobForm,
+    DeleteMessage,
   },
 };
 </script>
@@ -185,7 +233,7 @@ button:focus {
   box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
 }
 
-.addnewuser {
+.openModal {
   width: auto;
   height: auto;
   position: fixed;
@@ -210,7 +258,7 @@ button:focus {
   }
 }
 
-.active-form::before {
+.activeModalClass::before {
   content: "";
   position: absolute;
   top: 0;

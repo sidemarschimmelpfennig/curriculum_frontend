@@ -4,7 +4,7 @@
       <h3 class="pr-11">Adicionar Novo Usuário</h3>
       <span
         class="material-icons bold pl-8 hover:text-red-600 hover:cursor-pointer text-gray-700"
-        @click="closeModal"
+        @click="closeModal()"
         >close</span
       >
     </div>
@@ -16,7 +16,7 @@
       <input
         type="text"
         id="named"
-        v-model="nomes"
+        v-model="named"
         class="mt-1 block w-fullborder border-gray-500 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 py-2 px-3 text-sm"
         placeholder="Digite seu nome"
       />
@@ -47,15 +47,17 @@
       />
     </div>
     <button
-      @click="submitForm"
+      @click="createUser"
       class="w-full py-2 px-4 mt-4 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 focus:ring-blue-500"
     >
-      Salvar
+      Criar Usuário
     </button>
   </div>
 </template>
   
   <script>
+import axios from "axios";
+
 export default {
   props: {
     show: {
@@ -72,15 +74,24 @@ export default {
     };
   },
   methods: {
-    submitForm() {
-      console.log({
-        Nome: this.named,
-        Email: this.email,
-        Senha: this.password,
-        Nível: this.is_admin,
-      });
-      // Aqui você pode implementar o envio da API.
-      this.$emit("close");
+    async createUser() {
+      let data = {
+        named: this.named,
+        email: this.email,
+        password: this.password,
+        is_admin: this.is_admin,
+      };
+
+      try {
+        let response = await axios.post(
+          `${process.env.VUE_APP_API_URL}users`,
+          data
+        );
+        this.closeModal();
+      } catch (error) {
+        console.log(error);
+        alert("Ocorreu um erro ao criar usuário");
+      }
     },
     closeModal() {
       this.$emit("close");

@@ -7,20 +7,8 @@
   </div>
 </template>
 <script>
-export default {
-  data() {
-    return {};
-  },
-  mounted() {},
-  methods: {},
-};
+export default {};
 </script>
 <style lang="scss" scoped>
-.container-home {
-  height: 100vh;
-  background-color: #222;
-  h1 {
-    color: white;
-  }
-}
+@import "@/assets/scss/views/adminpages/homepage";
 </style>

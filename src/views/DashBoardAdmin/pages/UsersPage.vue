@@ -73,13 +73,11 @@ export default {
           named: "Sidemar",
           email: "sidemarschi@gmail.com",
           password: "1123",
-          is_admin: "0", // Defau
+          is_admin: "0",
         },
-
       ],
       showModal: false,
       api: process.env.VUE_APP_API_URL,
-
     };
   },
   methods: {
@@ -107,7 +105,7 @@ export default {
           throw new Error("Erro ao salvar os dados.");
         }
         alert("Usuário cadastrado com sucesso!");
-        this.fetchUsers(); // Atualiza a lista de usuários
+        this.fetchUsers();
         this.resetForm();
       } catch (error) {
         alert(error.message);
@@ -121,10 +119,7 @@ export default {
       };
     },
   },
-  mounted() {
-
-    // this.fetchUsers();
-  },
+  mounted() {},
   components: {
     NewUserAdmin,
   },

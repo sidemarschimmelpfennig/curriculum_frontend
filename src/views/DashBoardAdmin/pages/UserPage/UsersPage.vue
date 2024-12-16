@@ -1,15 +1,33 @@
 <template>
-  <div class="bg-blue-200 userpage" :class="{ 'active-form': showModal }">
+  <div
+    class="bg-blue-200 userpage"
+    :class="{ activeModalClass: showModal || showModalDelete }"
+  >
     <div
       class="grid grid-cols-1 gap-4 p-6 mx-auto bg-white rounded-lg shadow-md"
     >
       <div class="flex items-center justify-between">
-        <NewUserAdmin
+        <button
+          class="material-icons text-gray-600 hover:text-white px-4 py-2 rounded-md hover:bg-gray-600 shadow-md"
+          @click="showModal = true"
+        >
+          add
+        </button>
+        <CreateUserForm
           v-if="showModal"
           :show="showModal"
-          @close="showModal = false"
-          class="addnewuser"
+          @close="closeModal()"
+          class="openModal"
         />
+        <DeleteMessage
+          v-if="showModalDelete"
+          :show="showModalDelete"
+          @close="closeModal()"
+          :labelText="textDelete"
+          :routeText="textRouteDelete"
+          class="openModal"
+        />
+
         <h2 class="text-2xl font-semibold text-center flex-1">
           Usuários no Sistema
         </h2>
@@ -39,39 +57,30 @@
               :key="user.id"
               class="border-b text-start"
             >
+              <UpdateUserForm
+                v-if="showModalUpdate"
+                :show="showModalUpdate"
+                @close="closeModal()"
+                :idFromUser="user.id"
+                class="openModal"
+              />
               <td class="px-4 py-2 text-sm text-gray-700">{{ user.named }}</td>
               <td class="px-4 py-2 text-sm text-gray-700">{{ user.email }}</td>
               <td class="px-4 py-2 text-sm text-gray-700">
-                {{
-                  user.is_admin === 0
-                    ? "Usuário não administrador"
-                    : "Administrador"
-                }}
+                {{ user.is_admin === 0 ? "Padrão" : "Administrador" }}
               </td>
               <td class="px-4 py-2 text-sm text-gray-700">
                 <button
-                  class="material-icons text-red-600 hover:text-red-800 pr-4"
-                  @click="deleteJob(job.id)"
+                  class="material-icons text-red-600 hover:text-red-800 pr-4 border-none outline-none"
+                  @click="deleteUser(user.id)"
                 >
                   delete
                 </button>
                 <button
-                  class="material-icons text-blue-600 hover:text-blue-800 pr-4"
-                  @click="editJob(job.id)"
+                  class="material-icons text-blue-600 hover:text-blue-800 pr-4 border-none outline-none"
+                  @click="editJob(user.id)"
                 >
                   edit
-                </button>
-                <button
-                  class="material-icons text-gray-600 hover:text-gray-800 pr-4"
-                  @click="viewJob(job.id)"
-                >
-                  visibility
-                </button>
-                <button
-                  class="material-icons text-gray-600 hover:text-gray-800"
-                  @click="showModal = true"
-                >
-                  add
                 </button>
               </td>
             </tr>
@@ -86,34 +95,30 @@
 </template>
 
 <script>
-import NewUserAdmin from "./Forms/NewUserForm.vue";
+import DeleteMessage from "@/components/DeleteMessage.vue";
+import CreateUserForm from "./Forms/CreateUserForm.vue";
+import axios from "axios";
+import UpdateUserForm from "./Forms/UpdateUserForm.vue";
+
 export default {
   name: "UserManagement",
   data() {
     return {
-      users: [
-        {
-          named: "Sidemar",
-          email: "sidemarschi@gmail.com",
-          password: "1123",
-          is_admin: "0", // Defau
-        },
-      ],
+      users: [],
       showModal: false,
+      showModalDelete: false,
+      showModalUpdate: false,
+      textDelete: "",
+      textRouteDelete: "",
       api: process.env.VUE_APP_API_URL,
     };
   },
   methods: {
-    async fetchUsers() {
-      try {
-        const response = await fetch(`${this.api}`);
-        if (!response.ok) {
-          throw new Error("Erro ao buscar usuários.");
-        }
-        this.users = await response.json();
-      } catch (error) {
-        alert(error.message);
-      }
+    closeModal() {
+      this.showModalUpdate = false;
+      this.showModal = false;
+      this.showModalDelete = false;
+      this.getAllUsers();
     },
     async submitForm() {
       try {
@@ -128,10 +133,26 @@ export default {
           throw new Error("Erro ao salvar os dados.");
         }
         alert("Usuário cadastrado com sucesso!");
-        this.fetchUsers(); // Atualiza a lista de usuários
+        this.fetchUsers();
         this.resetForm();
       } catch (error) {
         alert(error.message);
+      }
+    },
+    deleteUser(id) {
+      this.showModalDelete = true;
+      this.textDelete = "Deseja excluir este usuário?";
+      this.textRouteDelete = `${this.api}users/${id}`;
+    },
+    updateUser() {},
+
+    async getAllUsers() {
+      try {
+        let response = await axios.get(`${this.api}users`);
+        let data = response.data;
+        this.users = data;
+      } catch (error) {
+        console.log(error.message);
       }
     },
     resetForm() {
@@ -143,10 +164,12 @@ export default {
     },
   },
   mounted() {
-    // this.fetchUsers();
+    this.getAllUsers();
   },
   components: {
-    NewUserAdmin,
+    CreateUserForm,
+    DeleteMessage,
+    UpdateUserForm,
   },
 };
 </script>
@@ -160,7 +183,7 @@ export default {
     width: 70rem;
   }
 }
-.addnewuser {
+.openModal {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -185,7 +208,7 @@ export default {
   }
 }
 
-.active-form::before {
+.activ::before {
   content: "";
   position: absolute;
   top: 0;

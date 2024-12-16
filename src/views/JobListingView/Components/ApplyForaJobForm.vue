@@ -130,29 +130,24 @@ export default {
     },
     async submitForm() {
       try {
-        // Criando uma instância de FormData
         const form = new FormData();
 
-        // Adicionando os campos do formulário
-        /* data = {
-          // Adicionando os dados do formulário ao FormData
+        data = {
           full_name: this.formData.full_Name,
           email: this.formData.email,
           phone: this.formData.phone,
           additional_info: this.formData.additional_info,
           skills: this.formData.skills,
-        };*/
+        };
 
-        // form.append("curriculum", this.curriculum, file);
+        form.append("curriculum", this.curriculum, file);
 
-        // if (this.formData.curriculum) {
-        //    form.append("curriculum", this.formData.curriculum);
-        //  }
-        //const curriculum = await axios.post(`${this.api}send`, data);
+        if (this.formData.curriculum) {
+          form.append("curriculum", this.formData.curriculum);
+        }
+        const curriculum = await axios.post(`${this.api}send`, data);
 
-        //  console.log(curriculum.data);
-
-        // Enviando a solicitação POST com FormData
+        console.log(curriculum.data);
         const response = await axios.post(`${this.api}send`, form, {
           headers: {
             "Content-Type": "multipart/form-data",

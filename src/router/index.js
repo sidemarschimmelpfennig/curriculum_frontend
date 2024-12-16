@@ -10,6 +10,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import DataRegisterPage from "@/views/DashBoardAdmin/pages/DataRegisterPage/DataRegisterPage.vue";
 import JobListingPage from "@/views/DashBoardAdmin/pages/JobListingPage/JobListingPage.vue";
 import UsersPage from "@/views/DashBoardAdmin/pages/UserPage/UsersPage.vue";
+import CandidatesForJob from "@/views/DashBoardAdmin/pages/CandidatesForJob/CandidatesForJob.vue";
 
 const routes = [
   {
@@ -63,6 +64,12 @@ const routes = [
         path:"register_data",
         name: "register_data",
         component: DataRegisterPage,
+      },
+      {
+        path:"candidatestojob/:id",
+        name: "candidatestojob",
+        component: CandidatesForJob,
+        props: true,
       }
     ]
   },
