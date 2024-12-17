@@ -61,7 +61,7 @@
                 v-if="showModalUpdate"
                 :show="showModalUpdate"
                 @close="closeModal()"
-                :idFromUser="user.id"
+                :idFromUser="idUser"
                 class="openModal"
               />
               <td class="px-4 py-2 text-sm text-gray-700">{{ user.named }}</td>
@@ -78,7 +78,7 @@
                 </button>
                 <button
                   class="material-icons text-blue-600 hover:text-blue-800 pr-4 border-none outline-none"
-                  @click="editJob(user.id)"
+                  @click="updateUser(user.id)"
                 >
                   edit
                 </button>
@@ -109,6 +109,7 @@ export default {
       showModalDelete: false,
       showModalUpdate: false,
       textDelete: "",
+      idUser: "",
       textRouteDelete: "",
       api: process.env.VUE_APP_API_URL,
     };
@@ -144,7 +145,11 @@ export default {
       this.textDelete = "Deseja excluir este usuário?";
       this.textRouteDelete = `${this.api}users/${id}`;
     },
-    updateUser() {},
+    updateUser(id) {
+      this.showModalUpdate = true;
+      this.idUser = id;
+      this.getAllUsers();
+    },
 
     async getAllUsers() {
       try {

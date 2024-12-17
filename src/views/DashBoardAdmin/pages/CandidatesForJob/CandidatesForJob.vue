@@ -23,72 +23,37 @@
         <div class="w-1/5">Nome do Candidato</div>
         <div class="w-2/5">Email</div>
         <div class="w-1/5">Telefone</div>
-        <div class="w-1/5"></div>
         <div class="w-1/5 text-center">Ações</div>
       </div>
       <div id="joblist-table-rows" class="divide-y">
         <div
-          v-for="(job, id) in filteredJobs"
+          v-for="(job, id) in jobs"
           :key="id"
           class="joblist-table-row flex items-center p-4 text-gray-600 hover:bg-gray-100 transition"
         >
-          <UpdateOrViewJobForm
-            v-if="showModalUpdate"
-            :show="showModalUpdate"
-            @close="showModalUpdate = false"
-            :idJobListing="isIdForJob"
-            :isUpdate="isUpdate"
-            class="addnewuser"
-          />
-          <DeleteMessage
-            v-if="showModalDelete"
-            :show="showModalDelete"
-            @close="createNewJob()"
-            :labelText="textDelete"
-            :routeText="textRouteDelete"
-            class="addnewuser"
-          />
-          <UpdateOrViewJobForm
-            v-if="showModalView"
-            :show="showModalView"
-            @close="showModalView = false"
-            :idJobListing="isIdForJob"
-            :isUpdate="isUpdate"
-            class="addnewuser"
-          />
-          <div class="w-1/5 truncate">{{ job.name }}</div>
+          <div class="w-1/5 truncate">{{ job.full_name }}</div>
           <div class="w-2/5 truncate">
-            {{ stringLimit(job.description, 40) }}
+            {{ job.email }}
           </div>
-          <div class="w-1/5 truncate">{{ job.department }}</div>
           <div class="w-1/5 truncate">
-            {{ job.status }}
+            {{ job.contactphone }}
           </div>
           <div class="w-1/5 flex justify-center space-x-2">
-            <button
-              class="material-icons text-red-600 hover:text-red-800"
-              @click="deleteJob(job.id, job.name)"
-            >
+            <button class="material-icons text-red-600 hover:text-red-800">
               delete
             </button>
-            <button
-              class="material-icons text-blue-600 hover:text-blue-800"
-              @click="editJob(job.id)"
-            >
+            <button class="material-icons text-blue-600 hover:text-blue-800">
               edit
             </button>
 
-            <button
-              class="material-icons text-gray-600 hover:text-gray-800"
-              @click="openJobView(job.id)"
-            >
+            <button class="material-icons text-gray-600 hover:text-gray-800">
               visibility
             </button>
             <button
               class="material-icons text-gray-600 hover:text-gray-800"
-              @click="getCandidates(job.id)"
+              @click="download(job.id)"
             >
-              lists
+              download
             </button>
           </div>
         </div>
@@ -97,10 +62,43 @@
   </div>
 </template>
   <script>
+import axios from "axios";
+
 export default {
   name: "JobListComponent",
   data() {
-    return {};
+    return {
+      jobs: [],
+      search: "",
+    };
+  },
+  methods: {
+    async getJobs() {
+      try {
+        let id = this.$route.params.id;
+        let response = await axios.get(
+          `http://localhost:5000/api/candidates/job/${id}`
+        );
+
+        this.jobs = response.data.candidates;
+        console.log(response);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async download(id) {
+      try {
+        let response = await axios.get(
+          `http://localhost:5000/api/candidates/download/id/${id}`
+        );
+        console.log(response);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+  },
+  mounted() {
+    this.getJobs();
   },
 };
 </script>
