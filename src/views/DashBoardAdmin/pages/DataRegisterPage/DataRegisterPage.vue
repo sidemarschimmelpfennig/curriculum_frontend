@@ -5,44 +5,7 @@
       <div class="container mx-auto justify-center flex mt-8">
         <div
           class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-4"
-        >
-          <div
-            v-for="(item, index) in containers"
-            :key="index"
-            class="w-[360px] h-[200px] text-gray-700 bg-slate-300 flex flex-col items-center justify-between rounded-lg shadow-md mx-4 my-4 hover:bg-gray-400 hover:cursor-pointer"
-          >
-            <h2 class="text-xl font-semibold mt-4 hover:text-white">
-              {{ item.title }}
-            </h2>
-
-            <div class="flex space-x-2 mb-4">
-              <button
-                class="material-icons text-gray-700 hover:text-white"
-                @click="deleteJob(item.id)"
-              >
-                delete
-              </button>
-              <button
-                class="material-icons text-gray-700 hover:text-white"
-                @click="editJob(item.id)"
-              >
-                edit
-              </button>
-              <button
-                class="material-icons text-gray-700 hover:text-white"
-                @click="viewJob(item.id)"
-              >
-                visibility
-              </button>
-              <button
-                class="material-icons text-gray-700 hover:text-white"
-                @click="viewJob(item.id)"
-              >
-                <span class="material-symbols-outlined"> add </span>
-              </button>
-            </div>
-          </div>
-        </div>
+        ></div>
       </div>
     </div>
   </div>
@@ -61,15 +24,9 @@ export default {
     };
   },
   methods: {
-    deleteJob(id) {
-      // Implementação da função de deletar
-    },
-    editJob(id) {
-      // Implementação da função de editar
-    },
-    viewJob(id) {
-      // Implementação da função de visualização
-    },
+    deleteJob(id) {},
+    editJob(id) {},
+    viewJob(id) {},
   },
 };
 </script>

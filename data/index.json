@@ -164,7 +164,8 @@
       "full_name": "João Silva",
       "contactphone": "+55 11 98765-4321",
       "email": "joao.silva@email.com",
-      "curriculum": "Fluente em inglês e espanhol. Interesse em trabalhar com tecnologias emergentes.",
+      "additional_info":"",
+      "curriculum": "",
       "id_vaga": "https://www.linkedin.com/in/joaosilva/"
     },
     {

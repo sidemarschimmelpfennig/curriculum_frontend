@@ -8,7 +8,7 @@
         :show="showModal"
         @close="showModal = false"
         class="applyanewjob"
-        :id-for-job="selectedJobId"
+        :idForJob="selectedJobId"
       />
     </div>
     <div
