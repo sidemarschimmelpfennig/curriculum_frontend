@@ -194,6 +194,7 @@ export default {
       }
     },
     editJob(id) {
+      this.isIdForJob = String(id);
       this.showModalUpdate = true;
       this.isUpdate = true;
       this.form = this.getJob(id);
@@ -210,7 +211,7 @@ export default {
       this.getJobs();
     },
     getCandidates(id) {
-      this.$router.push({ name: "candidatestojob", params: { id } });
+      this.$router.push({ name: "candidatestojob", params: { id: id } });
     },
   },
   mounted() {

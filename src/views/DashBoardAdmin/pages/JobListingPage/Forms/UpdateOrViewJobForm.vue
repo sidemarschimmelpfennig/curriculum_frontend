@@ -132,11 +132,7 @@ export default {
     closeModal() {
       this.$emit("close");
     },
-    submitForm() {
-      if (this.isUpdate) {
-        this.updateJob();
-      }
-    },
+    submitForm() {},
     async updateJob() {
       try {
         const response = await axios.put(

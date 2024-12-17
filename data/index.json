@@ -159,59 +159,6 @@
     }
   ],
   "candidates": [
-    {
-      "id": "1",
-      "full_name": "João Silva",
-      "contactphone": "+55 11 98765-4321",
-      "email": "joao.silva@email.com",
-      "additional_info":"",
-      "curriculum": "",
-      "id_vaga": "https://www.linkedin.com/in/joaosilva/"
-    },
-    {
-      "id": "1",
-      "full_name": "João Silva",
-      "contactphone": "+55 11 98765-4321",
-      "email": "joao.silva@email.com",
-      "curriculum": "Fluente em inglês e espanhol. Interesse em trabalhar com tecnologias emergentes.",
-      "id_vaga": "https://www.linkedin.com/in/joaosilva/"
-    },
-    {
-      "id": "3",
-      "name": "Carlos Souza",
-      "contactphone": "+55 31 93456-7890",
-      "contactphonetwo": "+55 31 94567-8901",
-      "email": "carlos.souza@email.com",
-      "city": "Belo Horizonte",
-      "address": "Rua da Liberdade, 456, Belo Horizonte - MG",
-      "curriculum": "Especialista em desenvolvimento de aplicações desktop usando C# e WPF, com mais de 5 anos de experiência.",
-      "additional": "Certificação em C# avançado e experiência com análise de sistemas.",
-      "socialmedia": "https://www.linkedin.com/in/carlossouza/"
-    },
-    {
-      "id": "4",
-      "name": "Fernanda Costa",
-      "contactphone": "+55 41 98765-4321",
-      "contactphonetwo": "+55 41 99987-6543",
-      "email": "fernanda.costa@email.com",
-      "city": "Curitiba",
-      "address": "Rua XV de Novembro, 789, Curitiba - PR",
-      "curriculum": "Desenvolvedora backend com experiência em Python e Django, especializada em sistemas de alta escalabilidade.",
-      "additional": "Boa comunicação e espírito de equipe. Experiência com DevOps e containers.",
-      "socialmedia": "https://www.linkedin.com/in/fernandacosta/"
-    },
-    {
-      "id": "5",
-      "name": "Lucas Almeida",
-      "contactphone": "+55 51 91234-5678",
-      "contactphonetwo": "+55 51 92345-6789",
-      "email": "lucas.almeida@email.com",
-      "city": "Porto Alegre",
-      "address": "Rua dos Andradas, 1010, Porto Alegre - RS",
-      "curriculum": "Desenvolvedor full-stack com experiência em Node.js, Express e bancos de dados SQL e NoSQL.",
-      "additional": "Gosto de trabalhar com tecnologias de ponta e sou apaixonado por melhorar a experiência do usuário.",
-      "socialmedia": "https://www.linkedin.com/in/lucasalmeida/"
-    }
   ],
   "candidatestojob": [
     {
@@ -226,13 +173,6 @@
       "named": "Sidemar",
       "email": "sidemarschi@gmail.com",
       "password": "1123",
-      "is_admin": 0
-    },
-    {
-      "id": "3",
-      "named": "Carlos",
-      "email": "carlos.silva@example.com",
-      "password": "senha987",
       "is_admin": 0
     },
     {
@@ -275,13 +215,6 @@
       "named": "Mariana",
       "email": "mariana.lima@example.com",
       "password": "mariana999",
-      "is_admin": 1
-    },
-    {
-      "id": "64e6",
-      "named": "Sidemar schimmelpfennig junior",
-      "email": "sidemarschimmelpfennig@outlook.com",
-      "password": "sadadds",
       "is_admin": 1
     }
   ]

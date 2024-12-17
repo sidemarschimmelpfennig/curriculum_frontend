@@ -10,7 +10,7 @@
         >close</span
       >
     </div>
-    <form @submit.prevent="submitForm" enctype="multipart/form-data">
+    <form @submit.prevent="submitForm">
       <div class="flex flex-col space-y-2">
         <label
           for="full_Name"
@@ -20,7 +20,7 @@
         <input
           type="text"
           id="full_Name"
-          v-model="form.full_Name"
+          v-model="form.full_name"
           required
           class="flex-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
         />
@@ -71,8 +71,10 @@
         >
         <input
           type="file"
-          id="curriculum"
-          @change="handleFileChange($event, 'curriculum')"
+          id="file"
+          @change="handleFileUpload($event)"
+          accept=".pdf"
+          required
           class="flex-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 py-2 px-3 text-sm"
           placeholder="Escolha um arquivo"
         />
@@ -81,7 +83,6 @@
       <button
         type="submit"
         class="py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition mt-4"
-        @click="submitForm"
       >
         Candidatar-se
       </button>
@@ -96,44 +97,53 @@ export default {
   data() {
     return {
       form: {
-        full_Name: "",
+        full_name: "",
         email: "",
-        phone: "",
+        contactphone: "",
         additional_info: "",
-        curriculum: "",
+        status: "Cadastrado",
+        id_for_job: this.idForJob,
+        file: null,
       },
-      file: "",
       api: process.env.VUE_APP_API_URL,
     };
   },
   methods: {
+    handleFileUpload(event) {
+      const file = event.target.files[0]; // Obtém o arquivo selecionado
+      if (file && file.type === "application/pdf") {
+        this.form.file = file;
+      } else {
+        alert("Por favor, envie um arquivo PDF.");
+      }
+    },
     async submitForm() {
       try {
-        data = {
-          full_name: this.formData.full_Name,
-          email: this.formData.email,
-          phone: this.formData.phone,
-          additional_info: this.formData.additional_info,
-          curriculum: this.info,
-          id_job: this.idForJob,
-        };
+        const form = new FormData();
 
-        file.append("curriculum", this.curriculum, file);
+        form.append("full_name", this.form.full_name);
+        form.append("email", this.form.email);
+        form.append("contactphone", this.form.contactphone);
+        form.append("additional_info", this.form.additional_info);
+        form.append("status", this.form.status);
+        form.append("id_for_job", this.form.id_for_job);
 
-        if (this.formData.curriculum) {
-          form.append("curriculum", this.formData.curriculum);
-        }
-        const curriculum = await axios.post(`${this.api}send`, data);
+        form.append("file", this.form.file);
 
-        console.log(curriculum.data);
-        const response = await axios.post(`${this.api}send`, form, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        });
-        console.log(response);
+        const response = await axios.post(
+          `http://localhost:5000/api/candidates`,
+          form,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+
+        console.log(response.data);
+
         console.log("curriculo cadastrado com sucesso");
-        this.closeModal(); // Fechar o modal após o envio
+        this.closeModal();
       } catch (error) {
         console.error("Erro ao enviar o formulário:", error);
         alert("Erro ao enviar o formulário. Por favor, tente novamente.");
@@ -154,7 +164,7 @@ export default {
       required: true,
     },
     idForJob: {
-      type: Number,
+      type: String,
       required: true,
     },
   },

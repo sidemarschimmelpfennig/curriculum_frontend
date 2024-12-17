@@ -55,7 +55,9 @@
   </div>
 </template>
     
-    <script>
+<script>
+import axios from "axios";
+
 export default {
   props: {
     show: {
@@ -79,19 +81,32 @@ export default {
     };
   },
   methods: {
-    submitForm() {
-      console.log({
+    async submitForm() {
+      let form = {
         named: this.named,
         email: this.email,
         password: this.password,
         is_admin: this.is_admin,
-      });
-      this.$emit("close");
-    },
+      };
+      try {
+        const response = await axios.put(
+          `${this.api}users/${this.idFromUser}`,
+          form
+        );
+        console.log(response);
 
+        this.closeModal();
+      } catch (error) {
+        console.log(error);
+      }
+    },
     async getUserById() {
-      let response = await axios.get(`${this.api}users/${this.idFromUser}`);
-      this.form = response.data;
+      try {
+        let response = await axios.get(`${this.api}users/${this.idFromUser}`);
+        this.form = response.data;
+      } catch (error) {
+        console.log(error);
+      }
     },
     closeModal() {
       this.$emit("close");
@@ -104,7 +119,7 @@ export default {
   },
   mounted() {
     window.addEventListener("keydown", this.handleKeydown);
-    getUserById();
+    this.getUserById();
   },
   beforeUnmount() {
     window.removeEventListener("keydown", this.handleKeydown);
