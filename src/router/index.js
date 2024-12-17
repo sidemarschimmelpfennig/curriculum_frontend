@@ -1,16 +1,16 @@
 import DashBoardAdminView from "@/views/DashBoardAdmin/DashBoardAdminView.vue";
-import ConfigurationPage from "@/views/DashBoardAdmin/pages/ConfigurationPage.vue";
-import HomeListPage from "@/views/DashBoardAdmin/pages/Forms/HomeListPage.vue";
-import NewJobForm from "@/views/DashBoardAdmin/pages/Forms/NewJobForm.vue";
-import HomePageAdmin from "@/views/DashBoardAdmin/pages/HomePageAdmin.vue";
-import JobListingPage from "@/views/DashBoardAdmin/pages/JobListingPage.vue";
-import UsersPage from "@/views/DashBoardAdmin/pages/UsersPage.vue";
+import HomePageAdmin from "@/views/DashBoardAdmin/pages/HomePageAdmin/HomePageAdmin.vue";
 import HomeView from "@/views/HomeView.vue";
 import JobListingView from "@/views/JobListingView/JobListingView.vue";
 import CreateAccountView from "@/views/LoginView/CreateAccountView.vue";
 import LoginView from "@/views/LoginView/LoginView.vue";
-
+import authMiddleware from '../middleware/authMiddleware';
+import store from '../store';
 import { createRouter, createWebHistory } from "vue-router";
+import DataRegisterPage from "@/views/DashBoardAdmin/pages/DataRegisterPage/DataRegisterPage.vue";
+import JobListingPage from "@/views/DashBoardAdmin/pages/JobListingPage/JobListingPage.vue";
+import UsersPage from "@/views/DashBoardAdmin/pages/UserPage/UsersPage.vue";
+import CandidatesForJob from "@/views/DashBoardAdmin/pages/CandidatesForJob/CandidatesForJob.vue";
 
 const routes = [
   {
@@ -27,7 +27,7 @@ const routes = [
     path: "/login",
     name: "login",
     component: LoginView,
-    meta: { requiresNavbar: false, requiresFooter: false },
+    meta: { requiresNavbar: false, requiresFooter: false  },
   },
   {
 
@@ -39,7 +39,11 @@ const routes = [
     path: "/admin",
     name: "admin",
     component: DashBoardAdminView,
-    meta: { requiresNavbar: false, requiresFooter: false},
+    meta: { 
+      requiresNavbar: false,
+      requiresFooter: false,
+    //  requiresAuth: true
+    },
     children:[
       {
         path:"",
@@ -50,27 +54,22 @@ const routes = [
         path:"joblistpage",
         name:'job-listpage',
         component:JobListingPage,
-        children:[
-          {
-            path:"",
-            name:"homelist",
-            component:HomeListPage
-          },
-          {
-            path:"create",
-            name:"create",
-            component: NewJobForm,
-          },
-        ]
+        meta:{authMiddleware: true},
       },{
         path:"userpage",
         name: "userpage",
         component: UsersPage,
       },
       {
-        path:"configuration",
-        name: "configuration",
-        component: ConfigurationPage,
+        path:"register_data",
+        name: "register_data",
+        component: DataRegisterPage,
+      },
+      {
+        path:"candidatestojob/:id",
+        name: "candidatestojob",
+        component: CandidatesForJob,
+        props: true,
       }
     ]
   },
@@ -80,5 +79,7 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
 });
+
+authMiddleware({ store, router })
 
 export default router;

@@ -1,39 +1,33 @@
 {
-  "jobs": [
-    {
-      "id": 1,
-      "nome": "delphi developer"
-    }
-  ],
   "departments": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Desenvolvimento"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Comercial"
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Suporte"
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "Administrativo"
     }
   ],
   "departmentCategory": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Backend"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Frontend"
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Desktop"
     }
   ],
@@ -57,162 +51,133 @@
   ],
   "joblisting": [
     {
-      "id": 1,
-      "jobname": "Desenvolvimento Backend em Java",
-      "description": "Desenvolvimento de sistemas backend robustos utilizando Java e Spring Boot. Requisitos de conhecimento: Java, Spring Boot, Banco de Dados SQL, Git, APIs RESTful.",
-      "status": "Em Seleção",
+      "id": "3f7b",
+      "name": "sdfsdf",
+      "description": "dsfsdf",
+      "department": "Comercial",
+      "department_categories": "Frontend",
+      "status": "Aberta",
+      "skills": [
+        "rrtssssss"
+      ],
+      "mobilities": "Presencial"
+    },
+    {
+      "id": "5b84",
+      "name": "sdfdf",
+      "description": "sdfdf",
       "department": "Desenvolvimento",
-      "start_date": "10/12/2024",
-      "departmentCategory": "Backend"
+      "department_categories": "Backend",
+      "status": "Aberta",
+      "skills": [
+        "dsdsf"
+      ],
+      "mobilities": "Presencial"
     },
     {
-      "id": 2,
-      "jobname": "Desenvolvimento Frontend em React",
-      "description": "Desenvolvimento de interfaces interativas e responsivas utilizando React e tecnologias modernas de frontend. Requisitos de conhecimento: React, JavaScript, HTML, CSS, Redux, APIs RESTful.",
-      "status": "Entrevista",
-      "department": "Desenvolvimento",
-      "start_date": "15/12/2024",
-      "departmentCategory": "Frontend"
+      "id": "a5d5",
+      "name": "sdfsdf",
+      "description": "dsfsdf",
+      "department": "Comercial",
+      "department_categories": "Backend",
+      "status": "Aberta",
+      "skills": [
+        "sdds"
+      ],
+      "mobilities": "Remoto"
     },
     {
-      "id": 3,
-      "jobname": "Desenvolvimento Desktop em C#",
-      "description": "Desenvolvimento de aplicações desktop para Windows utilizando C# e WPF. Requisitos de conhecimento: C#, WPF, .NET Framework, Design Patterns, Banco de Dados SQL.",
-      "status": "Finalizado",
-      "department": "Desenvolvimento",
-      "start_date": "01/11/2024",
-      "departmentCategory": "Desktop"
+      "id": "c2a4",
+      "name": "Sidemar schimmelpfennig junior",
+      "description": "adda",
+      "department": "Comercial",
+      "department_categories": "Frontend",
+      "status": "Aberta",
+      "skills": [
+        "fdssfddfsdf"
+      ],
+      "mobilities": "Presencial"
     },
     {
-      "id": 4,
-      "jobname": "Desenvolvimento Backend em Node.js",
-      "description": "Desenvolvimento de soluções em Node.js para aplicações de alta performance e escalabilidade. Requisitos de conhecimento: Node.js, JavaScript, Express.js, Banco de Dados NoSQL, APIs RESTful.",
-      "status": "Pausado",
-      "department": "Desenvolvimento",
-      "start_date": "20/11/2024",
-      "departmentCategory": "Backend"
+      "id": "5be4",
+      "name": "Sidemar schimmelpfennig junior",
+      "description": "gdghdgh",
+      "department": "Comercial",
+      "department_categories": "Frontend",
+      "status": "Aberta",
+      "skills": [
+        "rrtssssss"
+      ],
+      "mobilities": "Presencial"
     },
     {
-      "id": 5,
-      "jobname": "Desenvolvimento Frontend em Vue.js",
-      "description": "Desenvolvimento de aplicativos frontend utilizando Vue.js e integração com APIs RESTful. Requisitos de conhecimento: Vue.js, JavaScript, HTML, CSS, Tailwind CSS, APIs RESTful.",
-      "status": "Em Seleção",
-      "department": "Desenvolvimento",
-      "start_date": "05/12/2024",
-      "departmentCategory": "Frontend"
+      "id": "4cdf",
+      "name": "Desenvolvimento web de sites em wordpress",
+      "description": "fgfdfs",
+      "department": "Comercial",
+      "department_categories": "Frontend",
+      "status": "Aberta",
+      "skills": [
+        "dfsgfd"
+      ],
+      "mobilities": "Presencial"
     },
     {
-      "id": 6,
-      "jobname": "Desenvolvimento Desktop em Electron",
-      "description": "Criação de aplicações desktop multiplataforma utilizando Electron e JavaScript. Requisitos de conhecimento: Electron, JavaScript, Node.js, HTML, CSS.",
-      "status": "Finalizado",
-      "department": "Desenvolvimento",
-      "start_date": "25/10/2024",
-      "departmentCategory": "Desktop"
-    },
-    {
-      "id": 7,
-      "jobname": "Analista de Suporte Técnico",
-      "description": "Responsável por fornecer suporte técnico aos usuários, resolvendo problemas relacionados a hardware, software e redes. Requisitos de conhecimento: Redes de Computadores, Sistemas Operacionais, Diagnóstico de Hardware e Software, Ferramentas de Help Desk.",
-      "status": "Em Seleção",
-      "department": "Suporte",
-      "start_date": "10/12/2024",
-      "departmentCategory": "Suporte"
-    },
-    {
-      "id": 8,
-      "jobname": "Técnico de Suporte de TI",
-      "description": "Prestação de suporte técnico a sistemas e infraestrutura de TI, incluindo manutenção preventiva e corretiva. Requisitos de conhecimento: Infraestrutura de TI, Manutenção de Hardware, Redes de Computadores, Segurança da Informação.",
-      "status": "Entrevista",
-      "department": "Suporte",
-      "start_date": "15/12/2024",
-      "departmentCategory": "Suporte"
-    },
-    {
-      "id": 9,
-      "jobname": "Assistente Administrativo",
-      "description": "Responsável por realizar atividades administrativas diárias, como controle de documentos, agendamento de reuniões e apoio a equipes internas. Requisitos de conhecimento: Pacote Office, Gestão de Documentos, Comunicação Escrita, Organização e Planejamento.",
-      "status": "Pausado",
-      "department": "Administrativo",
-      "start_date": "05/12/2024",
-      "departmentCategory": "Administrativo"
-    },
-    {
-      "id": 10,
-      "jobname": "Coordenador Administrativo",
-      "description": "Gestão de processos administrativos da empresa, organização de equipes e apoio nas decisões estratégicas e operacionais.",
-      "status": "Finalizado",
-      "department": "Administrativo",
-      "start_date": "20/11/2024",
-      "departmentCategory": "Administrativo"
-    },
-    {
-      "id": 11,
-      "jobname": "Auxiliar de Departamento Pessoal",
-      "description": "Auxílio no controle de ponto, processamento de folha de pagamento e apoio na gestão de benefícios e contratos dos colaboradores.",
-      "status": "Em Seleção",
-      "department": "Administrativo",
-      "start_date": "10/12/2024",
-      "departmentCategory": "Administrativo"
-    },
-    {
-      "id": 12,
-      "jobname": "Assistente de Suporte ao Cliente",
-      "description": "Atendimento a clientes internos e externos, resolução de problemas e dúvidas relacionadas aos produtos e serviços oferecidos pela empresa.",
-      "status": "Entrevista",
-      "department": "Suporte",
-      "start_date": "15/12/2024",
-      "departmentCategory": "Suporte"
+      "id": "cae2",
+      "name": "Desenvolvimento web de sites em wordpress",
+      "description": "dsffsds",
+      "department": "Comercial",
+      "department_categories": "Frontend",
+      "status": "Aberta",
+      "skills": [
+        "dfsgfd"
+      ],
+      "mobilities": "Presencial"
     }
   ],
   "modalities": [
     {
-      "id": 1,
+      "id": "1",
       "name": "presencial"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "remoto"
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "hibrido"
     }
   ],
-  "job_candidate":[
+  "job_candidate": [
     {
-      "id":1,
-      "id_candidate":1,
-      "id_job_vancy":1
+      "job_id": 1,
+      "job": 1,
+      "full_name": "joao",
+      "file": 1,
+      "id": "3f36"
     }
   ],
   "candidates": [
     {
-      "id": 1,
-      "name": "João Silva",
+      "id": "1",
+      "full_name": "João Silva",
       "contactphone": "+55 11 98765-4321",
-      "contactphonetwo": "+55 11 99876-5432",
       "email": "joao.silva@email.com",
-      "city": "São Paulo",
-      "address": "Rua das Palmeiras, 123, Apto 45, São Paulo - SP",
-      "curriculum": "Experiência em desenvolvimento de software, com foco em backend utilizando Java e Spring Boot.",
-      "additional": "Fluente em inglês e espanhol. Interesse em trabalhar com tecnologias emergentes.",
-      "socialmedia": "https://www.linkedin.com/in/joaosilva/"
+      "additional_info":"",
+      "curriculum": "",
+      "id_vaga": "https://www.linkedin.com/in/joaosilva/"
     },
     {
-      "id": 2,
-      "name": "Maria Oliveira",
-      "contactphone": "+55 21 91234-5678",
-      "contactphonetwo": "+55 21 92345-6789",
-      "email": "maria.oliveira@email.com",
-      "city": "Rio de Janeiro",
-      "address": "Avenida Atlântica, 234, Rio de Janeiro - RJ",
-      "curriculum": "Desenvolvedora frontend com expertise em React, HTML5, CSS3 e integração com APIs REST.",
-      "additional": "Participação em projetos de código aberto e experiência em metodologias ágeis.",
-      "socialmedia": "https://www.linkedin.com/in/mariaoliveira/"
+      "id": "1",
+      "full_name": "João Silva",
+      "contactphone": "+55 11 98765-4321",
+      "email": "joao.silva@email.com",
+      "curriculum": "Fluente em inglês e espanhol. Interesse em trabalhar com tecnologias emergentes.",
+      "id_vaga": "https://www.linkedin.com/in/joaosilva/"
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Carlos Souza",
       "contactphone": "+55 31 93456-7890",
       "contactphonetwo": "+55 31 94567-8901",
@@ -224,7 +189,7 @@
       "socialmedia": "https://www.linkedin.com/in/carlossouza/"
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "Fernanda Costa",
       "contactphone": "+55 41 98765-4321",
       "contactphonetwo": "+55 41 99987-6543",
@@ -236,7 +201,7 @@
       "socialmedia": "https://www.linkedin.com/in/fernandacosta/"
     },
     {
-      "id": 5,
+      "id": "5",
       "name": "Lucas Almeida",
       "contactphone": "+55 51 91234-5678",
       "contactphonetwo": "+55 51 92345-6789",
@@ -249,7 +214,75 @@
     }
   ],
   "candidatestojob": [
-    {}
+    {
+      "id_candidate": 1,
+      "id_job_vancy": 1,
+      "id": "b4ce"
+    }
   ],
-  "users": []
+  "users": [
+    {
+      "id": "1",
+      "named": "Sidemar",
+      "email": "sidemarschi@gmail.com",
+      "password": "1123",
+      "is_admin": 0
+    },
+    {
+      "id": "3",
+      "named": "Carlos",
+      "email": "carlos.silva@example.com",
+      "password": "senha987",
+      "is_admin": 0
+    },
+    {
+      "id": "4",
+      "named": "Julia",
+      "email": "julia.reis@example.com",
+      "password": "julia1234",
+      "is_admin": 0
+    },
+    {
+      "id": "5",
+      "named": "Fernando",
+      "email": "fernando.souza@example.com",
+      "password": "fer4567",
+      "is_admin": 1
+    },
+    {
+      "id": "6",
+      "named": "Isabela",
+      "email": "isabela.martins@example.com",
+      "password": "isabela890",
+      "is_admin": 0
+    },
+    {
+      "id": "8",
+      "named": "Patricia",
+      "email": "patricia.gomes@example.com",
+      "password": "patricia321",
+      "is_admin": 0
+    },
+    {
+      "id": "9",
+      "named": "Ricardo",
+      "email": "ricardo.pereira@example.com",
+      "password": "ricardo789",
+      "is_admin": 0
+    },
+    {
+      "id": "10",
+      "named": "Mariana",
+      "email": "mariana.lima@example.com",
+      "password": "mariana999",
+      "is_admin": 1
+    },
+    {
+      "id": "64e6",
+      "named": "Sidemar schimmelpfennig junior",
+      "email": "sidemarschimmelpfennig@outlook.com",
+      "password": "sadadds",
+      "is_admin": 1
+    }
+  ]
 }

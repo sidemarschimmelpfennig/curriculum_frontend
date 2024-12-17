@@ -42,19 +42,14 @@
 <script>
 import axios from "axios";
 import JobListingComponent from "./Components/JobListingComponent.vue";
+import data from "@/assets/data.json";
 
 export default {
   data() {
     return {
-      departments: [
-        { name: "Todas" },
-        { name: "Desenvolvimento" },
-        { name: "Comercial" },
-        { name: "Suporte" },
-        { name: "Administrativo" },
-      ],
+      departments: [],
       selectedCategory: "Todas",
-      searchText: "", // Para armazenar o texto da pesquisa
+      searchText: "",
       arrayFromJobs: [],
 
       api: process.env.VUE_APP_API_URL,
@@ -63,7 +58,8 @@ export default {
   methods: {
     async getJobsListing() {
       try {
-        let response = await axios.get(`${this.api}jobvacancies`);
+        let response = await axios.get(`${this.api}joblisting`);
+        console.log(response.data);
         this.arrayFromJobs = response.data;
       } catch (error) {
         console.log(error);
@@ -85,6 +81,7 @@ export default {
   },
   mounted() {
     this.getJobsListing();
+    this.departments = data.departments;
   },
   components: {
     JobListingComponent,

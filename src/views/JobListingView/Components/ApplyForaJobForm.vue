@@ -20,7 +20,7 @@
         <input
           type="text"
           id="full_Name"
-          v-model="formData.full_Name"
+          v-model="form.full_Name"
           required
           class="flex-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
         />
@@ -33,7 +33,7 @@
         <input
           type="email"
           id="email"
-          v-model="formData.email"
+          v-model="form.email"
           required
           class="flex-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
         />
@@ -45,20 +45,8 @@
         <input
           type="tel"
           id="phone"
-          v-model="formData.phone"
+          v-model="form.phone"
           required
-          class="flex-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-        />
-      </div>
-
-      <div class="flex flex-col space-y-2">
-        <label for="skills" class="text-sm font-medium text-gray-700 text-start"
-          >Habilidades</label
-        >
-        <input
-          type="text"
-          id="skills"
-          v-model="formData.skills"
           class="flex-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
         />
       </div>
@@ -70,12 +58,11 @@
         >
         <textarea
           id="additional_info"
-          v-model="formData.additional_info"
+          v-model="form.additional_info"
           class="flex-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
           placeholder="Digite informações adicionais aqui..."
         ></textarea>
       </div>
-
       <div class="flex flex-col space-y-2">
         <label
           for="curriculum"
@@ -96,7 +83,7 @@
         class="py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition mt-4"
         @click="submitForm"
       >
-        Enviar
+        Candidatar-se
       </button>
     </form>
   </div>
@@ -108,51 +95,43 @@ import axios from "axios";
 export default {
   data() {
     return {
-      formData: {
+      form: {
         full_Name: "",
         email: "",
         phone: "",
         additional_info: "",
-        skills: "",
-        curriculum: null,
+        curriculum: "",
       },
+      file: "",
       api: process.env.VUE_APP_API_URL,
     };
   },
   methods: {
-    handleFileChange(event, fieldName) {
-      const file = event.target.files[0];
-      if (file) {
-        this.formData[fieldName] = file;
-      } else {
-        this.formData[fieldName] = null;
-      }
-    },
     async submitForm() {
       try {
-        // Criando uma instância de FormData
-        const form = new FormData();
+        data = {
+          full_name: this.formData.full_Name,
+          email: this.formData.email,
+          phone: this.formData.phone,
+          additional_info: this.formData.additional_info,
+          curriculum: this.info,
+          id_job: this.idForJob,
+        };
 
-        // Adicionando os campos do formulário
-        form.append("full_Name", this.formData.full_Name);
-        form.append("email", this.formData.email);
-        form.append("phone", this.formData.phone);
-        form.append("additional_info", this.formData.additional_info);
-        form.append("skills", this.formData.skills);
+        file.append("curriculum", this.curriculum, file);
 
-        // Adicionando o arquivo
         if (this.formData.curriculum) {
           form.append("curriculum", this.formData.curriculum);
         }
+        const curriculum = await axios.post(`${this.api}send`, data);
 
-        // Enviando a solicitação POST com FormData
-        const response = await axios.post(`${this.api}sendcurriculum`, form, {
+        console.log(curriculum.data);
+        const response = await axios.post(`${this.api}send`, form, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
         });
-
-        console.log(response.data);
+        console.log(response);
         console.log("curriculo cadastrado com sucesso");
         this.closeModal(); // Fechar o modal após o envio
       } catch (error) {

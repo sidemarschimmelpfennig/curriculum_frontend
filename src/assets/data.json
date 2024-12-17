@@ -1,0 +1,65 @@
+{
+   
+        "departmentCategory": [
+        {
+          "id": "1",
+          "name": "Backend"
+        },
+        {
+          "id": "2",
+          "name": "Frontend"
+        },
+        {
+          "id": "3",
+          "name": "Desktop"
+        }
+      ], 
+      "departments": [
+        {
+          "id": "1",
+          "name": "Desenvolvimento"
+        },
+        {
+          "id": "2",
+          "name": "Comercial"
+        },
+        {
+          "id": "3",
+          "name": "Suporte"
+        },
+        {
+          "id": "4",
+          "name": "Administrativo"
+        }
+      ],
+      "status": [
+        {
+          "id": "2",
+          "name": "Pausado"
+        },
+        {
+          "id": "3",
+          "name": "Aberta"
+        },
+        {
+          "id": "4",
+          "name": "Em Entrevista"
+        },
+        {
+          "id": "5",
+          "name": "Finalizado"
+        }
+      ],
+      "mobilities":[
+        { "id":1 , 
+        "name": "Remoto" 
+      },
+        { "id":2 ,
+        "name": "Presencial"
+      },
+      {
+        "id":3,
+        "name": "Híbrido"
+      }
+      ]
+}
